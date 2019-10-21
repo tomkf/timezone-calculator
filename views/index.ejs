@@ -2,29 +2,10 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="index.css" /> 
-<title>DO I NEED A JACKET</title>
+<title>Time Zone Calculator</title>
 </head>
 
-
-
 <body>
-
-<!--   
- <div class="wrap"> 
-    <% if (rainValue == true) { %>
-    <h1 id="content"> YES </h1>
-    <%  } else  { %>
-    <h1 id="content"> NO </h1>
-    <%  } %>
- </div>
- -->
-
-
-
- 
- <pre>
-
-</pre>
 
 <form action="/display" method="post" >
   <label for="cityA">Enter your city: </label>
@@ -35,44 +16,5 @@
     <input type="submit" value="Calculate Zones" />
 </form>
 
-
-
-
-
- <script> 
- let myFunc = () => {
-    console.log("hi")
- }
- 
- let url = "http://api.openweathermap.org/data/2.5/weather?id=6173331&APPID=5f84603ff719871b84a1aad42ca0f2b7"
- document.getElementById("content").addEventListener("click", myFunc) 
-
- var poemDisplay = document.querySelector('pre');
-
-
- var request = new XMLHttpRequest();
-request.open('GET', url);
-request.responseType = 'text';
-
-request.onload = function() {
-  poemDisplay.textContent = request.response;
-};
-
-request.send();
-
-
-console.log(request.response)
-
-
-
-fetch(url).then(function(response) {
-  response.json().then(function(text) {
-    poemDisplay.textContent = text.text();
-    console.log(text)
-  });
-});
-
- 
- </script>
 </body>
 </html>

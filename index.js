@@ -13,8 +13,6 @@ const mapApiCall = `http://api.openweathermap.org/data/2.5/weather?id=6173331&AP
 
 let apiDatabase = { reqA: null, reqB: null };
 
-let rainValue = null;
-
 const requestCalls = requestObj => {
   //requestObj will be an array built  from the event listenrs in the front-end...
 
@@ -51,20 +49,10 @@ const requestCalls = requestObj => {
 
     let results = responce.weather[0];
     console.log(response.coord);
-    findMyRain(results);
   });
 };
 
 requestCalls(1);
-
-const findMyRain = apiResult => {
-  console.log(apiResult);
-  let rainRegEx = RegExp("w*rain|Rainw*");
-  let a = rainRegEx.test(apiResult.main);
-  let b = rainRegEx.test(apiResult.description);
-  a || b === true ? (rainValue = true) : (rainValue = false);
-  return rainValue;
-};
 
 app.use(express.static("views"));
 app.use(express.static("styles"));
@@ -80,22 +68,6 @@ app.post("/display", function(req, res) {
   res.render("display.ejs", template);
 });
 
-app.post("/", (req, res) => {
-  cityA = req.body.cityA;
-  console.log(cityA);
-  // res.render("index", { title: "MyApp", inputData: whateverSearch });
-});
-
 app.get("/", (req, res) => {
-  let template = {
-    rainValue
-  };
-  res.render("index.ejs", template);
+  res.render("index.ejs");
 });
-
-// app.get("/display", (req, res) => {
-//   let template = {
-//     apiDatabase
-//   };
-//   res.render("display.ejs", template);
-// });
