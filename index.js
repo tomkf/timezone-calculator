@@ -40,6 +40,25 @@ const requestForecast = userCity => {
   });
 };
 
+const requestTimeZone = userCity => {
+  return new Promise((resolve, reject) => {
+    let zoneApiCall = `https://dev.virtualearth.net/REST/v1/TimeZone/query=${userCity}?key=${
+      config[1]
+    }`;
+
+    request(zoneApiCall, function(error, response, body) {
+      let responce = JSON.parse(body);
+      console.log(responce.resourceSets[0].resources[0].timeZoneAtLocation[0]);
+      console.log(
+        responce.resourceSets[0].resources[0].timeZoneAtLocation[0].timeZone[0]
+          .convertedTime
+      );
+      return responce
+        .resourceSets[0].resources[0].timeZoneAtLocation[0].timeZone[0].convertedTime;
+    });
+  });
+};
+
 // const requestCalls = requestObj => {
 //   //requestObj will be an array built  from the event listenrs in the front-end...
 
@@ -82,13 +101,13 @@ const requestForecast = userCity => {
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 app.post("/display", async function(req, res) {
-  //   let forecastA = requestForecast(req.body.cityA);
-
-  //   let forecastB = requestForecast(req.body.cityB);
-
   forecastA = await requestForecast(req.body.cityA);
 
   forecastB = await requestForecast(req.body.cityB);
+
+  timeZoneA = await requestTimeZone(req.body.cityA);
+
+  timeZoneB = await requestTimeZone(req.body.cityB);
 
   let nameA = req.body.cityA;
   let nameB = req.body.cityB;
