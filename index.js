@@ -7,6 +7,10 @@ const bodyParser = require("body-parser");
 
 const config = require("./config.js").tokens;
 
+app.use(express.static("views"));
+app.use(express.static("styles"));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 let apiDatabase = [];
 
 // const requestCalls = requestObj => {
@@ -48,35 +52,40 @@ let apiDatabase = [];
 //   });
 // };
 
-app.use(express.static("views"));
-app.use(express.static("styles"));
-app.use(bodyParser.urlencoded({ extended: true }));
+const requestForecast = userCity => {
+  let mapApiCall = `http://api.openweathermap.org/data/2.5/weather?q=${userCity}&APPID=${
+    config[0]
+  }`;
+  request(mapApiCall, function(error, response, body) {
+    let responce = JSON.parse(body);
+    // console.log(responce);
+    // console.log("*********************************************");
+    // console.log("*********************************************");
+    console.log(responce.weather[0].description);
+    apiDatabase.push(responce.weather[0].description);
+    return responce.weather[0].description;
+  });
+};
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 app.post("/display", function(req, res) {
-  const requestForecast = userCity => {
-    let mapApiCall = `http://api.openweathermap.org/data/2.5/weather?q=${userCity}&APPID=${
-      config[0]
-    }`;
-    request(mapApiCall, function(error, response, body) {
-      let responce = JSON.parse(body);
-      // console.log(responce);
-      // console.log("*********************************************");
-      // console.log("*********************************************");
-      console.log(responce.weather[0].description);
-      apiDatabase.push(responce.weather[0].description);
-      return responce.weather[0].description;
-    });
-  };
+  let parsedA = null;
 
-  let forecastA = requestForecast(req.body.cityA);
+  let forecastA = new Promise(function(resolve, reject) {
+    requestForecast(req.body.cityA);
+  });
+
+  forecastA.then(function(value) {
+    parsedA = value;
+  });
+
   let forecastB = requestForecast(req.body.cityB);
 
   let nameA = req.body.cityA;
   let nameB = req.body.cityB;
   console.log(forecastA, forecastB);
-  let template = { nameA, nameB, forecastA, forecastB };
+  let template = { nameA, nameB, parsedA, forecastB };
   res.render("display.ejs", template);
 });
 
