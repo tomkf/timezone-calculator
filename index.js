@@ -7,11 +7,38 @@ const bodyParser = require("body-parser");
 
 const config = require("./config.js").tokens;
 
+// require("./timeCal.js");
+
+const timeModule = require("./timeCal");
+
+// console.log(timeModule.timeCalc("2019-10-21T17:17:13", "2019-10-21T14:17:13"));
+
+//test examples:
+//2019-10-21T17:17:13
+//2019-10-21T14:17:13
+
 app.use(express.static("views"));
 app.use(express.static("styles"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 let apiDatabase = [];
+
+const requestForecast = userCity => {
+  return new Promise((resolve, reject) => {
+    let mapApiCall = `http://api.openweathermap.org/data/2.5/weather?q=${userCity}&APPID=${
+      config[0]
+    }`;
+    request(mapApiCall, function(error, response, body) {
+      let responce = JSON.parse(body);
+      // console.log(responce);
+      // console.log("*********************************************");
+      // console.log("*********************************************");
+      console.log(responce.weather[0].description);
+      apiDatabase.push(responce.weather[0].description);
+      resolve(responce.weather[0].description);
+    });
+  });
+};
 
 // const requestCalls = requestObj => {
 //   //requestObj will be an array built  from the event listenrs in the front-end...
@@ -52,40 +79,21 @@ let apiDatabase = [];
 //   });
 // };
 
-const requestForecast = userCity => {
-  let mapApiCall = `http://api.openweathermap.org/data/2.5/weather?q=${userCity}&APPID=${
-    config[0]
-  }`;
-  request(mapApiCall, function(error, response, body) {
-    let responce = JSON.parse(body);
-    // console.log(responce);
-    // console.log("*********************************************");
-    // console.log("*********************************************");
-    console.log(responce.weather[0].description);
-    apiDatabase.push(responce.weather[0].description);
-    return responce.weather[0].description;
-  });
-};
-
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-app.post("/display", function(req, res) {
-  let parsedA = null;
+app.post("/display", async function(req, res) {
+  //   let forecastA = requestForecast(req.body.cityA);
 
-  let forecastA = new Promise(function(resolve, reject) {
-    requestForecast(req.body.cityA);
-  });
+  //   let forecastB = requestForecast(req.body.cityB);
 
-  forecastA.then(function(value) {
-    parsedA = value;
-  });
+  forecastA = await requestForecast(req.body.cityA);
 
-  let forecastB = requestForecast(req.body.cityB);
+  forecastB = await requestForecast(req.body.cityB);
 
   let nameA = req.body.cityA;
   let nameB = req.body.cityB;
   console.log(forecastA, forecastB);
-  let template = { nameA, nameB, parsedA, forecastB };
+  let template = { nameA, nameB, forecastA, forecastB };
   res.render("display.ejs", template);
 });
 
