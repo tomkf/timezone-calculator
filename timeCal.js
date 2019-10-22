@@ -25,16 +25,13 @@ function calcMins(totMins) {
 function isAhead(date1, date2) {
   let timediff = 0;
   if (date1 > date2) {
-    return "Ahead";
+    return "ahead";
   } else {
-    return "Behind";
+    return "behind";
   }
 }
 
 function returnTimeDiff(cityA, cityB) {
-  //citydate1, citydate2 = timeZone -> convertedTime -> localTime
-  //let citydate1 =
-  //let citydate2 =
   let citydate1 = new Date(cityA);
   let citydate2 = new Date(cityB);
   let totminutes = findDiffInMinutes(citydate1, citydate2);
@@ -45,8 +42,10 @@ function returnTimeDiff(cityA, cityB) {
     findmins = 0;
   }
   let aheadOrBehind = isAhead(citydate1, citydate2);
-  if (findmins === 0) {
+  if (findmins === 0 && findhrs !== 0) {
     return `Your city is ${findhrs} hours ${aheadOrBehind} of your destination.`;
+  } else if (findhrs === 0 && findmins == 0) {
+    return "Your cities are located in the same timezone";
   } else {
     return `Your city is  ${findhrs} hours ${findmins} minutes ${aheadOrBehind}  of your destination.`;
   }

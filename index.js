@@ -84,12 +84,12 @@ app.post("/display", async function(req, res) {
     apiDatabase[0].timeVal,
     apiDatabase[1].timeVal
   );
-  console.log("test:", apiDatabase);
 
   let template = { forecastA, forecastB, objA, objB, timeCall };
   res.render("display.ejs", template);
 });
 
 app.get("/", (req, res) => {
+  apiDatabase = [];
   res.render("index.ejs");
 });
