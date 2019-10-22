@@ -75,7 +75,18 @@ app.post("/display", async function(req, res) {
     apiDatabase[1].timeVal
   );
 
-  let template = { forecastA, forecastB, objA, objB, timeCall };
+  let formatedDateA = timeModule.formatDate(apiDatabase[0].timeVal);
+  let formatedDateB = timeModule.formatDate(apiDatabase[1].timeVal);
+
+  let template = {
+    forecastA,
+    forecastB,
+    objA,
+    objB,
+    timeCall,
+    formatedDateA,
+    formatedDateB
+  };
   res.render("display.ejs", template);
 });
 

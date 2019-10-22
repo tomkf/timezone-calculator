@@ -10,21 +10,23 @@
 <body>
     
 <div class="city-card">
-    <h2>  <%= objA.name %> </h2>
+    <h2>  Your City: <%= objA.name %> </h2>
     <div> 
         <h4> Time zone: <%= objA.zoneName %> (<%= objA.zoneAbv %>) </h4>
         <span>Local forecast: </span>
         <p> <%= forecastA %> </p>
-        <span> Local time: <%= objA.timeVal %> </span>
+        <span> Local time: <%= formatedDateA %> </span>
     </div>
 </div>
 
 <div class="city-card">
-        <h2>  <%= objB.name %> </h2>
+        <h2> Your destination: <%= objB.name %> </h2>
         <div> 
             <h4> Time zone: <%= objB.zoneName %>  (<%= objB.zoneAbv %>) </h4>
             <span>Local forecast: </span>
             <p> <%= forecastB %>  </p>
+            <span> Local time: <%= formatedDateB %> </span>
+
         </div>
     </div>
     

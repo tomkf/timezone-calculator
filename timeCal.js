@@ -51,4 +51,20 @@ const returnTimeDiff = (cityA, cityB) => {
   }
 };
 
-module.exports = { timeCalc: returnTimeDiff };
+const formatDate = dateStr => {
+  let hr = parseInt(dateStr.slice(-8, -6));
+  let min = dateStr.slice(-5, -3);
+  let time = "am";
+  if (hr === 24) {
+    hr -= 12;
+  } else if (hr != 24 && hr > 12) {
+    hr -= 12;
+    time = "pm";
+  } else if (hr === 12) {
+    time = "pm";
+  }
+
+  return `${hr}:${min} ${time}`;
+};
+
+module.exports = { timeCalc: returnTimeDiff, formatDate: formatDate };
