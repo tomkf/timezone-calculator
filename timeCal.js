@@ -46,23 +46,9 @@ function returnTimeDiff(cityA, cityB) {
   }
   let aheadOrBehind = isAhead(citydate1, citydate2);
   if (findmins === 0) {
-    console.log(
-      "Your city is " +
-        findhrs +
-        " hrs " +
-        aheadOrBehind +
-        " of your destination."
-    );
+    return `Your city is ${findhrs} hours ${aheadOrBehind} of your destination.`;
   } else {
-    console.log(
-      "Your city is " +
-        findhrs +
-        " hrs:" +
-        findmins +
-        " mins " +
-        aheadOrBehind +
-        " of your destination."
-    );
+    return `Your city is  ${findhrs} hours ${findmins} minutes ${aheadOrBehind}  of your destination.`;
   }
 }
 

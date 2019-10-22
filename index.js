@@ -80,13 +80,13 @@ app.post("/display", async function(req, res) {
 
   let objB = apiDatabase[1];
 
-  // let timeCall = timeModule.timeCalc();
+  let timeCall = timeModule.timeCalc(
+    apiDatabase[0].timeVal,
+    apiDatabase[1].timeVal
+  );
   console.log("test:", apiDatabase);
 
-  let nameA = req.body.cityA;
-  let nameB = req.body.cityB;
-
-  let template = { nameA, nameB, forecastA, forecastB, objA, objB };
+  let template = { forecastA, forecastB, objA, objB, timeCall };
   res.render("display.ejs", template);
 });
 
