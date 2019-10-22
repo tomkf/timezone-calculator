@@ -7,8 +7,6 @@ const bodyParser = require("body-parser");
 
 const config = require("./config.js").tokens;
 
-// require("./timeCal.js");
-
 const timeModule = require("./timeCal");
 
 let apiDatabase = [];
@@ -22,8 +20,10 @@ const requestForecast = userCity => {
     let mapApiCall = `http://api.openweathermap.org/data/2.5/weather?q=${userCity}&APPID=${
       config[0]
     }`;
+
     request(mapApiCall, function(error, response, body) {
       let responce = JSON.parse(body);
+
       resolve(responce.weather[0].description);
     });
   });
@@ -37,14 +37,7 @@ const requestTimeZone = userCity => {
 
     request(zoneApiCall, function(error, response, body) {
       let responce = JSON.parse(body);
-      // console.log(
-      //   responce.resourceSets[0].resources[0].timeZoneAtLocation[0].timeZone[0]
-      //     .convertedTime.localTime
-      // );
-      // console.log(
-      //   responce.resourceSets[0].resources[0].timeZoneAtLocation[0].timeZone[0]
-      //     .convertedTime
-      // );
+
       resolve(
         apiDatabase.push({
           name:
@@ -69,15 +62,12 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 app.post("/display", async function(req, res) {
   let forecastA = await requestForecast(req.body.cityA);
-
   let forecastB = await requestForecast(req.body.cityB);
 
   await requestTimeZone(req.body.cityA);
-
   await requestTimeZone(req.body.cityB);
 
   let objA = apiDatabase[0];
-
   let objB = apiDatabase[1];
 
   let timeCall = timeModule.timeCalc(
