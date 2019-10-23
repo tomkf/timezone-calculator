@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 
 const config = require("./config.js").tokens;
 
-const timeModule = require("./timeCal");
+const timeModule = require("./timeCal.js");
 
 let apiDatabase = [];
 
@@ -94,6 +94,7 @@ app.post("/display", async function(req, res) {
       formatedDateA,
       formatedDateB
     };
+
     res.render("display.ejs", template);
   }
 });

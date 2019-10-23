@@ -5,35 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="index.css" /> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Time Zone Calculator</title>
 </head>
+
 <body>
+    <div class="d-flex flex-row">
+        <div class="p-2" id="div1">    
+        <div class="card text-center" style="width: 20rem;">
+                <h2 class="card-header">  Your City: <%= objA.name %> </h2>
+                <div class="card-body"> 
+                    <h4 class="card-title"> Time zone: <%= objA.zoneName %> (<%= objA.zoneAbv %>)</h4>
+                    <span>Local forecast: </span>
+                    <p class="card-subtitle"> <%= forecastA %> </p>
+                    <span> Local time: <%= formatedDateB %> </span>
+                </div>
+            </div>
+        </div>
+            <div class="ml-auto p-2" id="div2">
+            <div class="card text-center" style="width: 20rem;">
+                    <h2 class="card-header align-self-end"> Your destination: <%= objB.name %> </h2>
+                    <div class="card-body"> 
+                        <h4 class="card-title"> Time zone: <%= objB.zoneName %>  (<%= objB.zoneAbv %>) </h4>
+                        <span>Local forecast: </span>
+                        <p class="card-subtitle"> <%= forecastB %>  </p>
+                        <span> Local time: <%= formatedDateB %> </span>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+    <img src="images/vector-plane.jpg" alt="plane" id="plane" style="position: absolute;left:350px;top:100px;width:80px">
+            
+    <div class="mx-auto" style="width: 500px;" id="div3">
+        <div class="card text-center" style="width: 496px;">
+            <h2 class="result"> <%= timeCall %> </h2>
+            <a href='/'> Calculate new city </a> 
+    </div>    
+
+    <script> 
+    let counter = 0; 
+
+     const move = () => { 
+      var myplane = document.getElementById("plane"); 
+      var mydiv2 = document.getElementById("div2"); 
+      myplane.style.left = parseInt(myplane.style.left) + 1 + "px"; 
+      counter += 1; 
+      console.log(counter);
+      if (counter >= 385) { 
+          clearInterval(myinter); 
+         myplane.style.display = "none"; 
+          } 
+         }; 
     
-<div class="city-card">
-    <h2>  Your City: <%= objA.name %> </h2>
-    <div> 
-        <h4> Time zone: <%= objA.zoneName %> (<%= objA.zoneAbv %>) </h4>
-        <span>Local forecast: </span>
-        <p> <%= forecastA %> </p>
-        <span> Local time: <%= formatedDateA %> </span>
-    </div>
-</div>
-
-<div class="city-card">
-    <h2> Your destination: <%= objB.name %> </h2>
-    <div> 
-        <h4> Time zone: <%= objB.zoneName %>  (<%= objB.zoneAbv %>) </h4>
-        <span>Local forecast: </span>
-        <p> <%= forecastB %>  </p>
-        <span> Local time: <%= formatedDateB %> </span>
-    </div>
-</div>
+         const movePlane = () => { 
+             console.log("test"); 
+             myinter = setInterval(move, 10); 
+             }; 
     
-    <div class="diff-card">
-        <h2> <%= timeCall %> </h2>
-    </div>
-
-    <a href='/'> Calculate new city </a> 
-
+       onload = movePlane() 
+    </script>
 </body>
 </html>
