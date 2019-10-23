@@ -25,7 +25,7 @@ const requestForecast = userCity => {
       let responce = JSON.parse(body);
       console.log(responce);
       if (responce.cod == "404" || responce.cod == "400") {
-        resolve("404");
+        resolve("error");
       } else {
         resolve(responce.weather[0].description);
       }
@@ -68,7 +68,7 @@ app.post("/display", async function(req, res) {
   let forecastA = await requestForecast(req.body.cityA);
   let forecastB = await requestForecast(req.body.cityB);
 
-  if (forecastA === "404" || forecastB === "404") {
+  if (forecastA === "error" || forecastB === "error") {
     res.render("error.ejs");
   } else {
     await requestTimeZone(req.body.cityA);
