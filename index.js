@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 // docs: https://www.npmjs.com/package/request
 
 const config = require("./config.js").tokens;
-
 const timeModule = require("./timeCal.js");
 
 let apiDatabase = [];

@@ -1,0 +1,57 @@
+.card-header{
+    background-color:turquoise ;
+}
+
+.result{
+    margin-bottom: 0;
+    background-color:turquoise;
+}
+
+.card text-center{
+    margin-top: 7%;
+}
+
+.mx-auto{
+   border: 2px solid black;
+}
+.mx-auto h2{
+    padding: 2%;
+    margin: -1px;
+}
+
+.mx-auto a{
+    padding: 1%;
+    background-color: #caecf1;
+    margin: -1px;
+}
+
+body{
+    background-image: url("https://wallpaperaccess.com/full/450062.jpg")
+}
+
+.card {
+    margin: 0;
+    padding: -1px;
+}
+
+.card-header{
+    background-color: #4cf5e4;
+    border: 2px solid black;
+}
+
+.card-title{
+    background-color: #caecf1;
+    padding-bottom: 1%;
+}
+
+.card-subtitle{
+    padding-top: 4%;
+}
+
+.card-body{ 
+    background-color: #caecf1;
+    border-top: 2px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
