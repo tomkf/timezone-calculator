@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="index.css" /> 
-    <title>Your cities: </title>
+    <title>Time Zone Calculator</title>
 </head>
 <body>
     
@@ -20,15 +20,14 @@
 </div>
 
 <div class="city-card">
-        <h2> Your destination: <%= objB.name %> </h2>
-        <div> 
-            <h4> Time zone: <%= objB.zoneName %>  (<%= objB.zoneAbv %>) </h4>
-            <span>Local forecast: </span>
-            <p> <%= forecastB %>  </p>
-            <span> Local time: <%= formatedDateB %> </span>
-
-        </div>
+    <h2> Your destination: <%= objB.name %> </h2>
+    <div> 
+        <h4> Time zone: <%= objB.zoneName %>  (<%= objB.zoneAbv %>) </h4>
+        <span>Local forecast: </span>
+        <p> <%= forecastB %>  </p>
+        <span> Local time: <%= formatedDateB %> </span>
     </div>
+</div>
     
     <div class="diff-card">
         <h2> <%= timeCall %> </h2>
