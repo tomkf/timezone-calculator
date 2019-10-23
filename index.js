@@ -23,8 +23,8 @@ const requestForecast = userCity => {
 
     request(mapApiCall, function(error, response, body) {
       let responce = JSON.parse(body);
-
-      if (responce.cod == "404") {
+      console.log(responce);
+      if (responce.cod == "404" || responce.cod == "400") {
         resolve("404");
       } else {
         resolve(responce.weather[0].description);
