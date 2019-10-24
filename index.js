@@ -26,7 +26,7 @@ const requestForecast = userCity => {
       if (responce.cod == "404" || responce.cod == "400") {
         resolve("error");
       } else {
-        resolve(responce.weather[0].description);
+        resolve([responce.weather[0].main, responce.weather[0].description]);
       }
     });
   });
@@ -67,6 +67,11 @@ app.post("/display", async function(req, res) {
   let forecastA = await requestForecast(req.body.cityA);
   let forecastB = await requestForecast(req.body.cityB);
 
+    let parseA = forecastA[0]
+    let parseB = forecastA[1]
+    let parseC = forecastB[0]
+    let parseD = forecastB[1]
+
   if (forecastA === "error" || forecastB === "error") {
     res.render("error.ejs");
   } else {
@@ -85,8 +90,10 @@ app.post("/display", async function(req, res) {
     let formatedDateB = timeModule.formatDate(apiDatabase[1].timeVal);
 
     let template = {
-      forecastA,
-      forecastB,
+      parseA,
+      parseB,
+      parseC,
+      parseD,
       objA,
       objB,
       timeCall,

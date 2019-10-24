@@ -12,40 +12,41 @@
 
     <div class="d-flex flex-row">
         <div class="p-2" id="div1">    
-        <div class="card text-center" style="width: 20rem;">
+        <div class="card text-center" style="width: 42rem; height: 21rem;">
                 <h2 class="card-header">  Your City: <%= objA.name %> </h2>
                 <div class="card-body"> 
                     <h4 class="card-title"> Time zone: <%= objA.zoneName %> (<%= objA.zoneAbv %>)</h4>
                     <span> Local time: <%= formatedDateA %> </span>
-                    <span> <hr>Local Forecast: </hr></span>
-                    <p class="card-subtitle"> <%= forecastA.split(' ').map(w => w[0].toUpperCase() + w.substr(1).toLowerCase()).join(' ') %> </p>
+                    <span> <hr class="divide">Local Forecast: </hr></span>
+                    <p class="card-subtitle"> <%= parseA %>, <%= parseB %> </p>
                 </div>
             </div>
         </div>
 
             <div class="ml-auto p-2" id="div2">
-                <div class="card text-center" style="width: 20rem;">
+                <div class="card text-center" style="width: 42rem; height: 21rem;">
                     <h2 class="card-header">  Your Destination: <%= objB.name %> </h2>
                     <div class="card-body"> 
                         <h4 class="card-title"> Time zone: <%= objB.zoneName %> (<%= objB.zoneAbv %>)</h4>
                         <span> Local time: <%= formatedDateB %> </span>
-                        <span> <hr> Local Forecast: </hr></span>
-                        <p class="card-subtitle"> <%= forecastB.split(' ').map(w => w[0].toUpperCase() + w.substr(1).toLowerCase()).join(' ') %> </p>
+                        <span> <hr class="divide"> Local Forecast: </hr></span>
+                        <p class="card-subtitle"> <%= parseC %>, <%= parseD %> </p>
                     </div>
                 </div>
             </div>
         </div>  
 
-    <img src="images/vector-plane.jpg" alt="plane" id="plane" style="position: absolute;left:350px;top:100px;width:80px">
-            
-    <div class="mx-auto" style="width: 500px; margin-top: 2%" id="div3">
-        <div class="card text-center" style="width: 496px;">
+    <img src="images/vector-plane.jpg" alt="plane" id="plane" style=" position: absolute; left: 725px; top: 175px; width: 120px;">
+   
+    <div class="mx-auto" style="width: 550px; margin-top: 6%; height: 235px;" id="div3">
+        <div class="card text-center" style="width: 546px; height: 230px;">
             <h2 class="result"> <%= timeCall %> </h2>
             <a href='/'> Calculate new city </a> 
     </div>    
 
     <script> 
     let counter = 0; 
+    let myinter = null
 
      const move = () => { 
       var myplane = document.getElementById("plane"); 
@@ -53,7 +54,7 @@
       myplane.style.left = parseInt(myplane.style.left) + 1 + "px"; 
       counter += 1; 
       console.log(counter);
-      if (counter >= 375) { 
+      if (counter === 330) { 
           clearInterval(myinter); 
          myplane.style.display = "none"; 
           } 
@@ -61,10 +62,10 @@
     
          const movePlane = () => { 
              console.log("test"); 
-             myinter = setInterval(move, 8); 
+             myinter = setInterval(move, 6); 
              }; 
 
-       onload = movePlane() 
+        onload = movePlane() 
     </script>
 </body>
 </html>

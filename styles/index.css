@@ -15,14 +15,14 @@
    border: 2px solid black;
 }
 .mx-auto h2{
-    padding: 2%;
+    padding: 8%;
     margin: -1px;
 }
 
 .mx-auto a{
-    padding: 1%;
+    padding: 4%;
     background-color: #caecf1;
-    margin: -1px;
+    margin: 0px;
 }
 
 body{
@@ -54,4 +54,8 @@ body{
     border-left: 1px solid black;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
+}
+
+.divide{
+    margin-bottom: 2rem;
 }
